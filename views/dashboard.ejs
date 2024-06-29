@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/x-icon" href="/assets/images/analyse-regular-24.png">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+
+        <title>SYSTEM ADMIN</title>
+
+        <link rel="stylesheet" href="/assets/style.css">
+        <link rel="stylesheet" href="/assets/dashboard.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/assets/design/bootstrap.css">
+
+        <script src="/assets/design/chart.js"></script>
+        <script src="/assets/index.js"></script>
+    </head>
+    <body>
+        
+<section id="page">
+
+
+<!-- ------------------------------------- -->
+        <div id="navigation-bar">
+
+         <div id="logo-company">
+            <span id="icon-menu"><i class='bx bx-analyse' ></i></span>
+            <span id="icon-menu">LiLiFin</span>
+            <i class='bx bx-menu'id="menu-barx"></i>
+         </div>
+
+         <div id="menu-list">
+
+            <a id="list" href="/">
+            
+              <span id="icon-menu"><i class="bx bx-home"></i></span>
+              <span id="icon-menu">Dashboard</span>
+             
+            </a>
+            <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-user-circle' ></i></span>
+                <span id="icon-menu">Profile</span>
+  
+              </a>
+            <a id="list" href="/analitic">
+            
+                <span id="icon-menu"><i class='bx bx-line-chart' ></i></span>
+                <span id="icon-menu">Statistic</span>
+  
+              </a>
+            <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-group'></i></span>
+                <span id="icon-menu">Participants</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bxs-message-rounded'></i></span>
+                <span id="icon-menu">Message</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bxs-cog'></i></span>
+                <span id="icon-menu">Setting</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-log-in'></i></span>
+                <span id="icon-menu">Login</span>
+  
+              </a>
+              
+
+         </div>
+
+
+        </div>
+<!-- -------------------------------------- -->
+
+<!----------------------- main --------------->
+        <div id="main">
+
+            <div id="bar-top">
+                <i class='bx bx-menu'id="menu-bar"></i>
+                <input type="search" id="search-in" placeholder="Search">
+                <div id="image-profile-acc">
+                    <span><i class="bx bx-group"></i></span>
+                </div>
+            </div>
+         
+ 
+           
+          <div id="home-page">
+
+       
+
+             <div id="info-general">
+
+
+            <!-- main info -->
+              <div id="main-info">
+              
+                <!-- details info -->
+                <div id="details-info">
+                  
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(27, 27, 239);"></span>
+                  <span id="data-info">T Amount <span id="am-info">2.2356$</span></span>
+                </span>
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(29, 147, 47);"></span>
+                  <span id="data-info">T Amount for PTS <span id="am-info">2056$</span></span>
+                </span>
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(238, 144, 22);"></span>
+                  <span id="data-info">T Given to PTS <span id="am-info">556$</span></span>
+                </span>
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(210, 8, 75);"></span>
+                  <span id="data-info">Remaining T of PTS <span id="am-info">256$</span></span>
+                </span>
+
+                </div>
+                <!-- chart info -->
+                <div id="chart-info">
+                 
+                  <canvas id="infoChart"></canvas>
+
+
+                </div>
+
+
+                <div id="details-info">
+                  
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(30, 142, 176);"></span>
+                  <span id="data-info">No of PTS <span id="am-info">57</span></span>
+                </span>
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(130, 211, 8);"></span>
+                  <span id="data-info">No of Completed PTS <span id="am-info">29</span></span>
+                </span>
+                <span id="info-D">
+                  <span id="color-info" style="background-color: rgb(173, 19, 137);"></span>
+                  <span id="data-info">No of Pending PTS <span id="am-info">15</span></span>
+                </span>
+
+                </div>
+                <!-- chart info -->
+                <div id="chart-info">
+                 
+
+                  <canvas id="UserChart"></canvas>
+
+
+                </div>
+
+
+
+              </div>
+              <!-- users -->
+              <div id="users-info">
+
+                <div id="table-participants-user">
+                  <h5 datatotal='<%- JSON.stringify(participants) %>' id="table-participants-user-A">In progress</h5>
+                  <table class="table table-striped table-hover  tb-home">
+                  <thead>
+                    <tr>
+                      <th> ID</th>
+                      <th>Profile</th>
+                      <th>Name</th>
+                      <th>T Received</th>
+                      <th>Satus</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% participants.forEach(participant => { %>
+                      <tr>
+                          <td><%= participant.id %></td>
+                        <td class="table-condensed"><a href="/participant/<%= participant.name %>"><img src="/assets/images/prince.jpg" alt="<%= participant.name %>'s Profile Picture" style="width: 40px; height: 40px; border-radius: 50%"></a></td>
+                        <td><a href="/participant/<%= participant.name %>"> <%= participant.name %></a></td>
+                        <td class="table-success"><%= participant.totalReceived %></td>
+                        <td class="table-success"> <%= participant.statusOfStudy %></td>
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+
+              </div>
+
+
+
+
+             </div>
+
+
+
+
+
+
+
+
+
+
+          </div>
+         
+       
+
+
+
+
+
+
+
+
+
+        </div>
+<!----------------------------------------- -->
+
+</section>
+ 
+
+<script>
+
+  //var participanttotalP = JSON.parse(document.getElementById('table-participantsP').getAttribute('datatotal'));
+// Get a reference to the canvas element
+const infoD = document.getElementById('infoChart').getContext('2d');
+
+// Create the data for the doughnut chart
+const data = {
+  labels: ['pending', 'request', 'accepted', 'rejected'], // Labels for the chart sections
+  datasets: [{
+    data: [10, 40,30, 20], // Values for each section (adjust the values as needed)
+    backgroundColor: ['rgb(27, 27, 239)', 'rgb(29, 147, 47)', 'rgb(238, 144, 22)','rgb(210, 8, 75)'], // Colors for each section
+  }],
+};
+
+// Create the options for the doughnut chart
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
+
+// Create the doughnut chart
+const doughnutChart = new Chart(infoD, {
+  type: 'doughnut',
+  data: data,
+  options: options,
+});
+
+
+
+
+
+
+
+
+
+
+//var participanttotalP = JSON.parse(document.getElementById('table-participantsP').getAttribute('datatotal'));
+// Get a reference to the canvas element
+const Users = document.getElementById('UserChart').getContext('2d');
+
+// Create the data for the doughnut chart
+const datauser = {
+  labels: ['A','B','C'], // Labels for the chart sections
+  datasets: [{
+    data: [40,50,10], // Values for each section (adjust the values as needed)
+    backgroundColor: ['rgb(30, 142, 176)','rgb(130, 211, 8)','rgb(173, 19, 137)'], // Colors for each section
+  }],
+};
+
+// Create the options for the doughnut chart
+const optionsuser = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
+
+// Create the doughnut chart
+const doughnutChartuser = new Chart(Users, {
+  type: 'doughnut',
+  data: datauser,
+  options: optionsuser,
+});
+
+
+
+
+
+</script>
+
+    </body>
+    </html>

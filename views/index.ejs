@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/x-icon" href="/assets/images/analyse-regular-24.png">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+
+        <title>SYSTEM ADMIN</title>
+
+        <link rel="stylesheet" href="/assets/style.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/assets/design/bootstrap.css">
+
+        <script src="/assets/design/chart.js"></script>
+        <script src="/assets/index.js"></script>
+    </head>
+    <body>
+        
+<section id="page">
+
+
+<!-- ------------------------------------- -->
+        <div id="navigation-bar">
+
+         <div id="logo-company">
+            <span id="icon-menu"><i class='bx bx-analyse' ></i></span>
+            <span id="icon-menu">LiLiFin</span>
+            <i class='bx bx-menu'id="menu-barx"></i>
+         </div>
+
+         <div id="menu-list">
+
+            <a id="list" href="/">
+            
+              <span id="icon-menu"><i class="bx bx-home"></i></span>
+              <span id="icon-menu">Dashboard</span>
+             
+            </a>
+            <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-user-circle' ></i></span>
+                <span id="icon-menu">Profile</span>
+  
+              </a>
+            <a id="list" href="/analitic">
+            
+                <span id="icon-menu"><i class='bx bx-line-chart' ></i></span>
+                <span id="icon-menu">Statistic</span>
+  
+              </a>
+            <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-group'></i></span>
+                <span id="icon-menu">Participants</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bxs-message-rounded'></i></span>
+                <span id="icon-menu">Message</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bxs-cog'></i></span>
+                <span id="icon-menu">Setting</span>
+  
+              </a>
+              <a id="list">
+            
+                <span id="icon-menu"><i class='bx bx-log-in'></i></span>
+                <span id="icon-menu">Login</span>
+  
+              </a>
+              
+
+         </div>
+
+
+        </div>
+<!-- -------------------------------------- -->
+
+<!----------------------- main --------------->
+        <div id="main">
+
+            <div id="bar-top">
+                <i class='bx bx-menu'id="menu-bar"></i>
+                <input type="search" id="search-in" placeholder="Search">
+                <div id="image-profile-acc">
+                    <span><i class="bx bx-group"></i></span>
+                </div>
+            </div>
+         
+ 
+            <h4 style="padding-top: 30px; color: rgb(53, 53, 178)">Participant Table</h4>
+
+
+
+
+            <div id="all-participants">
+              
+            <div id="table-participants">
+                <h5 datatotal='<%- JSON.stringify(participants) %>' id="table-participantsA">In progress</h5>
+                <table class="table table-striped table-hover table-responsive table-condensed xd">
+                <thead>
+                  <tr>
+                    <th> ID</th>
+                    <th>Profile</th>
+                    <th>Name</th>
+                    <th>T Received</th>
+                    <th>T Spent</th>
+                    <th>R Balance</th>
+                    <th>Satus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% participants.forEach(participant => { %>
+                    <tr>
+                        <td><%= participant.id %></td>
+                      <td clas="table-condensed"><a href="/participant/<%= participant.name %>"><img src="/assets/images/prince.jpg" alt="<%= participant.name %>'s Profile Picture" style="width: 40px; height: 40px; border-radius: 50%"></a></td>
+                      <td><a href="/participant/<%= participant.name %>"> <%= participant.name %></a></td>
+                      <td class="table-success"><%= participant.totalReceived %></td>
+                      <td class="table-danger"><%= participant.totalSpent %></td>
+                      <td class="table-warning"><%= participant.totalReceived - participant.totalSpent %></td>
+                      <td class="table-success"> <%= participant.statusOfStudy %></td>
+                    </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+
+            <div id="analytic">
+            <canvas id="forexChart"></canvas>
+            </div>
+
+
+          </div>
+
+
+          <div id="completed-participants">   
+
+            
+            
+            <div id="table-completed">
+            <h5 datatotal='<%- JSON.stringify(participantCompleted) %>' id="table-participantsC">Completed</h5>
+            <table class="table table-striped table-hover table-responsive table-condensed">
+              <thead>
+                <tr>
+                  <th> ID</th>
+      <th>Profile</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>School</th>
+      <th>Year</th>
+      <th>T year</th>
+      <th>Terms</th>
+      <th>Field</th>
+      <th>T Received</th>
+      <th>T Spent</th>
+      <th>R Balance</th>
+      <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% participantCompleted.forEach(participantCompleted => { %>
+                  <tr>
+                      <td><%= participantCompleted.id %></td>
+                      <td clas="table-condensed"><a href="/participant/<%= participantCompleted.name %>"><img src="/assets/images/prince.jpg" alt="<%= participantCompleted.name %>'s Profile Picture" style="width: 40px; height: 40px; border-radius: 50%"></a></td>
+                      <td><a href="/participant/<%= participantCompleted.name %>"> <%= participantCompleted.name %></a></td>
+        <td><%= participantCompleted.gender %></td>
+        <td><%= participantCompleted.schoolStudying %></td>
+        <td><%= participantCompleted.academicYears %></td>
+        <td><%= participantCompleted.totalYearsOfStudies %></td>
+        <td><%= participantCompleted.totalTerm %></td>
+        <td><%= participantCompleted.fieldOfStudies %></td>
+        <td class="table-success"><%= participantCompleted.totalReceived %></td>
+        <td class="table-danger"><%= participantCompleted.totalSpent %></td>
+        <td class="table-warning"><%= participantCompleted.totalReceived - participantCompleted.totalSpent %></td>
+        <td class="table-success"><%= participantCompleted.statusOfStudy %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+         
+          <div id="analytic-completed">
+               <h4>Financial plan completed</h4>
+               <canvas id="completeChart"></canvas>
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <div id="pending-participants">   
+
+            
+            
+          <div id="table-pending">
+          <h5 datatotal='<%- JSON.stringify(participantPending) %>' id="table-participantsP">Pending</h5>
+          <table class="table table-striped table-hover table-responsive table-condensed">
+            <thead>
+              <tr>
+                <th> ID</th>
+    <th>Profile</th>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>School</th>
+    <th>Year</th>
+    <th>T year</th>
+    <th>Terms</th>
+    <th>Field</th>
+    <th>T Received</th>
+    <th>T Spent</th>
+    <th>R Balance</th>
+    <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% participantPending.forEach(participantPending => { %>
+                <tr>
+                    <td><%= participantPending.id %></td>
+                    <td clas="table-condensed"><a href="/participant/<%= participantPending.name %>"><img src="/assets/images/prince.jpg" alt="<%= participantPending.name %>'s Profile Picture" style="width: 40px; height: 40px; border-radius: 50%"></a></td>
+                    <td><a href="/participant/<%= participantPending.name %>"> <%= participantPending.name %></a></td>
+      <td><%= participantPending.gender %></td>
+      <td><%= participantPending.schoolStudying %></td>
+      <td><%= participantPending.academicYears %></td>
+      <td><%= participantPending.totalYearsOfStudies %></td>
+      <td><%= participantPending.totalTerm %></td>
+       <td class="table-success"><%= participantPending.totalReceived %></td>
+      <td class="table-warning"><%= participantPending.totalReceived - participantPending.totalSpent %></td>
+     <td><%= participantPending.fieldOfStudies %></td>
+      <td class="table-success"><%= participantPending.statusOfStudy %></td>
+      <td class="table-danger"><%= participantPending.totalSpent %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+       
+        <div id="analytic-pending">
+          
+             <canvas id="pendingChart"></canvas>
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+        </div>
+<!----------------------------------------- -->
+
+</section>
+ 
+<style>
+  body{
+    color: rgba(236, 128, 20, 0.579);
+  }
+</style>
+
+<script>
+
+  var participanttotalA = JSON.parse(document.getElementById('table-participantsA').getAttribute('datatotal'));
+  var Received = participanttotalA.reduce((acc, participant) => acc + participant.totalReceived, 0);
+  var Spent = participanttotalA.reduce((acc, participant) => acc + participant.totalSpent, 0);
+  var Balance = Received - Spent;
+  var ctx = document.getElementById("forexChart").getContext("2d");
+  // Sample data for participants
+  var participantsData = {
+    labels: ["Received", "Spent", "Balance"],
+    datasets: [
+      {
+        label: "Total Amount",
+        data: [`${Received}`, `${Spent}`, `${Balance}`],
+        backgroundColor: ["rgba(27, 110, 27, 0.596)", "rgba(246, 67, 8, 0.546)", "rgba(236, 128, 20, 0.579)"],
+        borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+  var forexChart = new Chart(ctx, {
+    type: "polarArea",
+    data: participantsData,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+
+
+
+
+  var completeParticipant = document.getElementById("completeChart").getContext("2d");
+  var participanttotalC = JSON.parse(document.getElementById('table-participantsC').getAttribute('datatotal'));
+  var totalParticipant = participanttotalC.length;
+  console.log(totalParticipant);
+  var Received = participanttotalC.reduce((acc, participant) => acc + participant.totalReceived, 0);
+  var Spent = participanttotalC.reduce((acc, participant) => acc + participant.totalSpent, 0);
+  var foundback = participanttotalC.reduce((acc, participant) => acc + participant.foundback, 0);
+  var amountPL = 0;
+  var define = "";
+
+  if(Received <= foundback){
+
+    amountPL = foundback - Received;
+    define += `PROFIT = ${amountPL} `;
+   
+    
+  }else{
+    
+    amountPL = Received - foundback;
+    define += `LOSS = ${amountPL}`;
+  }
+
+  var participantsDatacomp = {
+    labels: [`USED AMOUNT = ${Received}`,`FOUND B = ${foundback}`,`${define}`,`TOTAL = ${Received + amountPL}`],
+    datasets: [
+      {
+        label: "AMOUNT",
+        data: [`${Received}`],
+        backgroundColor: ["rgba(200, 99, 150, 0.6)"],
+        borderColor: ["rgba(255, 100, 210, 1)"],
+        borderWidth: 1,
+      },
+      {
+        label: "FOUND BACK",
+        data: [`${foundback}`],
+        backgroundColor: ["rgba(100, 242, 100, 0.8)"],
+        borderColor: ["rgba(200, 10, 210, 1)"],
+        borderWidth: 1,
+      },
+      {
+        label: `${Received <= foundback ? 'PROFIT':'LOSS' }`,
+        data: [`${Received*0.1}`],
+        backgroundColor: ["rgba(236, 128, 20, 0.579)"],
+        borderColor: ["rgba(255, 206, 86, 1)"],
+        borderWidth: 1,
+      },
+      {
+        label: "TOTAL",
+        data: [`${Received + (Received*0.1)}`],
+        backgroundColor: ["rgba(27, 110, 27, 0.596)"],
+        borderColor: ["rgba(75, 192, 192, 1)"],
+        borderWidth: 1,
+      }
+    ],
+  };
+  var completchar = new Chart(completeParticipant, {
+    type: "bar",
+    data: participantsDatacomp,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+
+
+
+
+
+  var participanttotalP = JSON.parse(document.getElementById('table-participantsP').getAttribute('datatotal'));
+// Get a reference to the canvas element
+const pending = document.getElementById('pendingChart').getContext('2d');
+
+// Create the data for the doughnut chart
+const data = {
+  labels: ['pending', 'request', 'accepted', 'rejected','completed'], // Labels for the chart sections
+  datasets: [{
+    data: [`${participanttotalP.length}`, 40,`${participanttotalA.length}`, 20,`${participanttotalC.length}`], // Values for each section (adjust the values as needed)
+    backgroundColor: ['rgba(222, 199, 10, 0.8)', 'rgba(255, 206, 86, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 99, 132, 0.6)','rgba(55, 19, 12, 0.9)'], // Colors for each section
+  }],
+};
+
+// Create the options for the doughnut chart
+const options = {
+  responsive: true,
+  maintainAspectRatio: false,
+};
+
+// Create the doughnut chart
+const doughnutChart = new Chart(pending, {
+  type: 'doughnut',
+  data: data,
+  options: options,
+});
+
+
+
+
+</script>
+
+
+
+    </body>
+    </html>
